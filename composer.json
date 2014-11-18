@@ -1,0 +1,28 @@
+{
+    "name": "theshadow/sliq",
+    "description": "A library for building SQL statements via a chainable interface",
+    "type": "library",
+    "keywords": [
+       "sliq", "sql"
+    ],
+    "homepage": "https://github.com/theshadow/sliq/",
+    "license": "CC0-Universal",
+    "authors": [
+        {
+            "name": "Xander Guzman",
+            "email": "xander.guzman@xanderguzman.com",
+            "role": "lead"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/theshadow/sliq/issues"
+    },
+    "require": {
+        "php": ">=5.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "SliQ": "src/"
+        }
+    }
+}
