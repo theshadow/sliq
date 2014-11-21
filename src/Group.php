@@ -16,7 +16,7 @@ namespace SliQ;
 class Group
 {
     /**
-     * @var Statement
+     * @var StatementInterface
      */
     protected $statement;
 
