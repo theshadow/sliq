@@ -26,11 +26,6 @@ class Conditional
     const TYPE_OR = 2;
 
     /**
-     *
-     */
-    const TYPE_NEITHER = 3;
-
-    /**
      * @var int
      */
     protected $type;
@@ -46,24 +41,6 @@ class Conditional
     protected $group;
 
     /**
-     * @return $this
-     */
-    public function andThis()
-    {
-        $this->type = static::TYPE_AND;
-        return $this;
-    }
-
-    /**
-     * @return $this
-     */
-    public function orThis()
-    {
-        $this->type = static::TYPE_OR;
-        return $this;
-    }
-
-    /**
      * @param Field $field
      * @return $this
      */
@@ -74,12 +51,64 @@ class Conditional
     }
 
     /**
+     * @return Field
+     */
+    public function getField()
+    {
+        return $this->field;
+    }
+
+    /**
      * @param Group $group
      * @return $this
      */
     public function setGroup(Group $group)
     {
         $this->group = $group;
+        return $this;
+    }
+
+    /**
+     * @return Group
+     */
+    public function getGroup()
+    {
+        return $this->group;
+    }
+
+    /**
+     * @param $type
+     * @return $this
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @return $this
+     */
+    public function andThis()
+    {
+        $this->setType(static::TYPE_AND);
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function orThis()
+    {
+        $this->setType(static::TYPE_OR);
         return $this;
     }
 
@@ -94,21 +123,5 @@ class Conditional
             ->setGroup($this->group);
         $this->setField($field);
         return $field;
-    }
-
-    /**
-     * @return int
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * @return Field
-     */
-    public function getField()
-    {
-        return $this->field;
     }
 }

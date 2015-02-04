@@ -9,6 +9,8 @@
 namespace SliQ;
 
 
+use SliQ\Statement\SelectStatementParserInterface;
+
 /**
  * Class SelectStatement
  * @package SliQ
@@ -40,6 +42,37 @@ class SelectStatement implements StatementInterface
      * @var mixed
      */
     protected $sortBy;
+
+    /**
+     * @var SelectStatementParserInterface
+     */
+    protected $parser;
+
+    /**
+     * @param SelectStatementParserInterface $parser
+     * @return $this
+     */
+    public function setParser(SelectStatementParserInterface $parser)
+    {
+        $this->parser = $parser;
+        return $this;
+    }
+
+    /**
+     * @return SelectStatementParserInterface
+     */
+    public function getParser()
+    {
+        return $this->parser;
+    }
+
+    /**
+     * @return string
+     */
+    public function parse()
+    {
+        return $this->getParser()->parse($this);
+    }
 
     /**
      * @param array $fields

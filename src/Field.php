@@ -13,6 +13,10 @@ namespace SliQ;
  * Class Field
  * @package SliQ
  */
+/**
+ * Class Field
+ * @package SliQ
+ */
 class Field
 {
     /**
@@ -144,9 +148,9 @@ class Field
      */
     public function equalTo($value)
     {
-        $this->operand = static::OP_EQUAL_TO;
-        $this->value = $value;
-        return $this->group;
+        $this->setOperand(static::OP_EQUAL_TO)
+            ->setValues($value);
+        return $this->getGroup();
     }
 
     /**
@@ -155,9 +159,9 @@ class Field
      */
     public function notEqualTo($value)
     {
-        $this->operand = static::OP_NOT_EQUAL_TO;
-        $this->value = $value;
-        return $this->group;
+        $this->setOperand(static::OP_NOT_EQUAL_TO)
+            ->setValues($value);
+        return $this->getGroup();
     }
 
     /**
@@ -166,9 +170,9 @@ class Field
      */
     public function like($value)
     {
-        $this->operand = static::OP_LIKE;
-        $this->value = $value;
-        return $this->group;
+        $this->setOperand(static::OP_LIKE)
+            ->setValues($value);
+        return $this->getGroup();
     }
 
     /**
@@ -177,9 +181,9 @@ class Field
      */
     public function in(array $values)
     {
-        $this->operand = static::OP_IN;
-        $this->value = $values;
-        return $this->group;
+        $this->setOperand(static::OP_IN)
+            ->setValues($values);
+        return $this->getGroup();
     }
 
     /**
@@ -188,9 +192,9 @@ class Field
      */
     public function notIn(array $values)
     {
-        $this->operand = static::OP_NOT_IN;
-        $this->value = $values;
-        return $this->group;
+        $this->setOperand(static::OP_NOT_IN)
+            ->setValues($values);
+        return $this->getGroup();
     }
 
     /**
@@ -199,9 +203,9 @@ class Field
      */
     public function notLike($value)
     {
-        $this->operand = static::OP_NOT_LIKE;
-        $this->value = $value;
-        return $this->group;
+        $this->setOperand(static::OP_NOT_LIKE)
+            ->setValues($value);
+        return $this->getGroup();
     }
 
     /**
@@ -210,9 +214,9 @@ class Field
      */
     public function lessThan($value)
     {
-        $this->operand = static::OP_LESS_THAN;
-        $this->value = $value;
-        return $this->group;
+        $this->setOperand(static::OP_LESS_THAN)
+            ->setValues($value);
+        return $this->getGroup();
     }
 
     /**
@@ -222,8 +226,8 @@ class Field
     public function lessThanOrEqualTo($value)
     {
         $this->operand = static::OP_LESS_THAN_EQUAL_TO;
-        $this->value = $value;
-        return $this->group;
+        $this->setValues($value);
+        return $this->getGroup();
     }
 
     /**
@@ -232,9 +236,9 @@ class Field
      */
     public function greaterThan($value)
     {
-        $this->operand = static::OP_GREATER_THAN;
-        $this->value = $value;
-        return $this->group;
+        $this->setOperand(static::OP_GREATER_THAN)
+            ->setValues($value);
+        return $this->getGroup();
     }
 
     /**
@@ -243,9 +247,9 @@ class Field
      */
     public function greaterThanOrEqualTo($value)
     {
-        $this->operand = static::OP_GREATER_THAN_EQUAL_TO;
-        $this->value = $value;
-        return $this->group;
+        $this->setOperand(static::OP_GREATER_THAN_EQUAL_TO)
+            ->setValues($value);
+        return $this->getGroup();
     }
 
     /**
@@ -253,8 +257,8 @@ class Field
      */
     public function isNull()
     {
-        $this->operand = static::OP_IS_NULL;
-        return $this->group;
+        $this->setOperand(static::OP_IS_NULL);
+        return $this->getGroup();
     }
 
     /**
@@ -262,8 +266,8 @@ class Field
      */
     public function isNotNull()
     {
-        $this->operand = static::OP_IS_NOT_NULL;
-        return $this->group;
+        $this->setOperand(static::OP_IS_NOT_NULL);
+        return $this->getGroup();
     }
 
     /**
@@ -273,8 +277,9 @@ class Field
      */
     public function between($x, $y)
     {
-        $this->operand = static::OP_BETWEEN;
-        return $this->group;
+        $this->setOperand(static::OP_BETWEEN)
+            ->setValues(array($x, $y));
+        return $this->getGroup();
     }
 
     /**
@@ -284,9 +289,9 @@ class Field
      */
     public function notBetween($x, $y)
     {
-        $this->operand = static::OP_NOT_BETWEEN;
-        $this->value = array($x, $y);
-        return $this->group;
+        $this->setOperand(static::OP_NOT_BETWEEN)
+            ->setValues(array($x, $y));
+        return $this->getGroup();
     }
 
     /**
@@ -297,6 +302,14 @@ class Field
     {
         $this->group = $group;
         return $this;
+    }
+
+    /**
+     * @return Group
+     */
+    public function getGroup()
+    {
+        return $this->group;
     }
 
     /**
@@ -316,10 +329,30 @@ class Field
     }
 
     /**
+     * @param $operand
+     * @return $this
+     */
+    public function setOperand($operand)
+    {
+        $this->operand = $operand;
+        return $this;
+    }
+
+    /**
      * @return mixed
      */
     public function getValues()
     {
         return $this->values;
+    }
+
+    /**
+     * @param $values
+     * @return $this
+     */
+    public function setValues($values)
+    {
+        $this->values = $values;
+        return $this;
     }
 }
